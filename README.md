@@ -44,3 +44,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Note: Strict mode is removed to prevent re-rendering and calling api twice (in development mode). Although if applicatino is run in production mode it wont call re-render twice.
