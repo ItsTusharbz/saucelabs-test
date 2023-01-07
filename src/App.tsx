@@ -4,6 +4,7 @@ import QuestionContainer from "./components/QuestionContainer/QuestionContainer"
 import { gameContextType, questionSetType, questionType } from "./util/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
+import { questionData } from "./MockData";
 
 export const GameContext = createContext<gameContextType>({
   wrongAnswerCount: 0,
@@ -35,9 +36,10 @@ function App() {
   const totalAttemp = 3;
   const fetchQuestions = async (): Promise<void> => {
     setIsLoading(true);
-    const resp = await fetch("https://eok9ha49itquif.m.pipedream.net");
-    const { questions } = await resp.json();
-    const UniqueQuestions = filterQuestions(questions);
+    // const resp = await fetch("https://eok9ha49itquif.m.pipedream.net");
+    // const { questions } = await resp.json();
+
+    const UniqueQuestions = filterQuestions(questionData);
     setQuestionSet(UniqueQuestions);
     setIsLoading(false);
   };

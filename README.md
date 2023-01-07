@@ -46,3 +46,9 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 Note: Strict mode is removed to prevent re-rendering and calling api twice (in development mode). Although if applicatino is run in production mode it wont call re-render twice.
+
+## Rules of the game
+
+Game is simple answer the correct question and move forward.
+You have 3 life line once over game ends.
+You can restart the game after that.

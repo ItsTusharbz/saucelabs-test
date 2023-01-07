@@ -19,7 +19,7 @@ export default function GameOver({ show, setShow }: props) {
       <Modal.Body>
         <div className={`modalBody`}>
           <div>
-            Thank you for playing game! <br />
+            Thank you for playing quizz! <br />
             Your streak : <strong>{streak}</strong>
           </div>
           <Button
