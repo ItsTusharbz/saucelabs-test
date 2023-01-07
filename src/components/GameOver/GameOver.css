@@ -1,0 +1,9 @@
+.modalBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.restart{
+    width: 200px;
+}
