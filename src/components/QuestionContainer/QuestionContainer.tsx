@@ -15,7 +15,7 @@ export default function QuestionContainer({ questionSet }: props) {
   const [currentQuestionId, setcurrentQuestionId] = useState(0);
   const [currentAns, setCurrentAns] = useState("");
   const [showGameOverModal, setshowGameOverModal] = useState(false);
-  const { wrongAnswerCount, setWrongAnswersCount, setStreak, streak } =
+  const { wrongAnswerCount, setWrongAnswersCount, setStreak, streak, isDark } =
     useContext(GameContext);
   const [showMsg, setShowMsg] = useState("");
 
@@ -60,8 +60,8 @@ export default function QuestionContainer({ questionSet }: props) {
   };
 
   return (
-    <div className="questionContianer">
-      <div className="questioncard">
+    <div className={`questionContianer`}>
+      <div className={`questioncard ${isDark ? "dark" : ""}`}>
         {renderQuestion(questionSet)}
         <div className="verifyButton">
           <Button variant="primary" onClick={submit}>
@@ -76,7 +76,7 @@ export default function QuestionContainer({ questionSet }: props) {
           </Alert>
         )}
       </div>
-      <GameOver show={showGameOverModal} />
+      <GameOver show={showGameOverModal} setShow={setshowGameOverModal} />
     </div>
   );
 }

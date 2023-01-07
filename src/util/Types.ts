@@ -11,4 +11,6 @@ export type gameContextType = {
   streak: number;
   setStreak: Function;
   restartGame: Function;
+  isDark: boolean;
+  setisDark: Function;
 };

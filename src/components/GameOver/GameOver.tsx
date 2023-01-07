@@ -5,18 +5,19 @@ import "./GameOver.css";
 
 type props = {
   show: boolean;
+  setShow: Function;
 };
 
-export default function GameOver({ show }: props) {
-  const { restartGame, streak } = useContext(GameContext);
+export default function GameOver({ show, setShow }: props) {
+  const { restartGame, streak, isDark } = useContext(GameContext);
 
   return (
-    <Modal show={show}>
-      <Modal.Header>
-        <Modal.Title>Game Overe</Modal.Title>
+    <Modal show={show} onHide={() => setShow()}>
+      <Modal.Header className="header" closeButton>
+        <Modal.Title>Game Over</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="modalBody">
+        <div className={`modalBody`}>
           <div>
             Thank you for playing game! <br />
             Your streak : <strong>{streak}</strong>

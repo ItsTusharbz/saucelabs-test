@@ -1,8 +1,9 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import "./App.css";
 import QuestionContainer from "./components/QuestionContainer/QuestionContainer";
 import { gameContextType, questionSetType, questionType } from "./util/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Form } from "react-bootstrap";
 
 export const GameContext = createContext<gameContextType>({
   wrongAnswerCount: 0,
@@ -10,6 +11,8 @@ export const GameContext = createContext<gameContextType>({
   streak: 0,
   setStreak: () => {},
   restartGame: () => {},
+  isDark: false,
+  setisDark: () => {},
 });
 
 function App() {
@@ -17,6 +20,17 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [wrongAnswerCount, setWrongAnswersCount] = useState(0);
   const [streak, setStreak] = useState(0);
+  const [isDark, setisDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDark]);
+
+  const ref = useRef();
 
   const totalAttemp = 3;
   const fetchQuestions = async (): Promise<void> => {
@@ -58,26 +72,38 @@ function App() {
         streak,
         setStreak,
         restartGame: restartGame,
+        isDark,
+        setisDark,
       }}
     >
-      <div className="App">
-        <div className="heading">
-          <h1>Welcome to GK game</h1>
-          <div>
-            <h2 className={`${wrongAnswerCount === 2 ? "danger" : ""}`}>
-              Chances left :
-              <span data-testid="counter">
-                {totalAttemp - wrongAnswerCount}
-              </span>
-            </h2>
-            <h5>Streak :{streak}</h5>
+      <div className={`App`}>
+        <div>
+          <div className="switch">
+            <Form.Check
+              type="switch"
+              id="custom-switch"
+              label="Dark"
+              onChange={() => setisDark((prev) => !prev)}
+            />
           </div>
+          <div className="heading">
+            <h1>Welcome to GK game</h1>
+            <div>
+              <h2 className={`${wrongAnswerCount === 2 ? "danger" : ""}`}>
+                Chances left :
+                <span data-testid="counter">
+                  {totalAttemp - wrongAnswerCount}
+                </span>
+              </h2>
+              <h5>Streak :{streak}</h5>
+            </div>
+          </div>
+          {!isLoading ? (
+            <QuestionContainer questionSet={questionSet} />
+          ) : (
+            <i>Loading...</i>
+          )}
         </div>
-        {!isLoading ? (
-          <QuestionContainer questionSet={questionSet} />
-        ) : (
-          <i>Loading...</i>
-        )}
       </div>
     </GameContext.Provider>
   );

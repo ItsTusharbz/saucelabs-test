@@ -16,3 +16,10 @@ code {
 .alert{
   padding: 0.5rem !important;
 }
+
+.dark{
+  background-color: black;
+  color: white;
+
+}
+

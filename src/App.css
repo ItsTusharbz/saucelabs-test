@@ -1,7 +1,15 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .danger{
   color: red;
+}
+
+.switch{
+  display: flex;
+  align-items:center;
+  width: 100px;
 }
