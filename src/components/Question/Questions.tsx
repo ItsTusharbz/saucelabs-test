@@ -10,7 +10,6 @@ type props = {
 
 export default function Question({ question, onAnswer, currentAns }: props) {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     onAnswer(e.target.value);
   };
 

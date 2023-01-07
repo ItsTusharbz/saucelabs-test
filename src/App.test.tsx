@@ -32,9 +32,7 @@ test("Initial attemp value should be 3", () => {
 });
 
 test("test input field and button are working", async () => {
-  const handleAnswer = (data) => {
-    console.log(data);
-  };
+  const handleAnswer = (data) => {};
   render(
     <Question
       question={questionData[0]}
