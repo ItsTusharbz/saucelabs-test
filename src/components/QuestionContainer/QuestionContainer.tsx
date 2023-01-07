@@ -1,6 +1,6 @@
 import sha1 from "crypto-js/sha1";
 import { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Alert, Button, Toast } from "react-bootstrap";
 import { GameContext } from "../../App";
 import { questionSetType } from "../../util/Types";
 import GameOver from "../GameOver/GameOver";
@@ -17,6 +17,7 @@ export default function QuestionContainer({ questionSet }: props) {
   const [showGameOverModal, setshowGameOverModal] = useState(false);
   const { wrongAnswerCount, setWrongAnswersCount, setStreak, streak } =
     useContext(GameContext);
+  const [showMsg, setShowMsg] = useState("");
 
   const handleAnswer = (ans: string) => {
     ans.toLowerCase();
@@ -42,12 +43,18 @@ export default function QuestionContainer({ questionSet }: props) {
   const submit = () => {
     const answer = sha1(currentAns).toString();
     if (questionSet[currentQuestionId].answerSha1 === answer) {
-      setcurrentQuestionId((prev) =>
-        prev === questionSet.length - 1 ? prev : prev + 1
-      );
+      setShowMsg("Correct");
       setCurrentAns("");
-      setStreak(streak + 1);
+      setTimeout(() => {
+        setShowMsg("");
+        setcurrentQuestionId((prev) =>
+          prev === questionSet.length - 1 ? prev : prev + 1
+        );
+        setStreak(streak + 1);
+        setShowMsg("");
+      }, 1000);
     } else {
+      setShowMsg("Wrong Answer");
       setWrongAnswersCount(wrongAnswerCount + 1);
     }
   };
@@ -61,6 +68,13 @@ export default function QuestionContainer({ questionSet }: props) {
             Verify
           </Button>
         </div>
+        {showMsg && (
+          <Alert
+            variant={`${showMsg.includes("Correct") ? "success" : "danger"}`}
+          >
+            {showMsg}
+          </Alert>
+        )}
       </div>
       <GameOver show={showGameOverModal} />
     </div>

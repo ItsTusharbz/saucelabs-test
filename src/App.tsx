@@ -4,7 +4,13 @@ import QuestionContainer from "./components/QuestionContainer/QuestionContainer"
 import { gameContextType, questionSetType, questionType } from "./util/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export const GameContext = createContext<gameContextType>(null);
+export const GameContext = createContext<gameContextType>({
+  wrongAnswerCount: 0,
+  setWrongAnswersCount: () => {},
+  streak: 0,
+  setStreak: () => {},
+  restartGame: () => {},
+});
 
 function App() {
   const [questionSet, setQuestionSet] = useState<questionSetType>([]);
@@ -12,6 +18,7 @@ function App() {
   const [wrongAnswerCount, setWrongAnswersCount] = useState(0);
   const [streak, setStreak] = useState(0);
 
+  const totalAttemp = 3;
   const fetchQuestions = async (): Promise<void> => {
     setIsLoading(true);
     const resp = await fetch("https://eok9ha49itquif.m.pipedream.net");
@@ -54,7 +61,18 @@ function App() {
       }}
     >
       <div className="App">
-        <h1>Chances left {3 - wrongAnswerCount}/3</h1>
+        <div className="heading">
+          <h1>Welcome to GK game</h1>
+          <div>
+            <h2 className={`${wrongAnswerCount === 2 ? "danger" : ""}`}>
+              Chances left :
+              <span data-testid="counter">
+                {totalAttemp - wrongAnswerCount}
+              </span>
+            </h2>
+            <h5>Streak :{streak}</h5>
+          </div>
+        </div>
         {!isLoading ? (
           <QuestionContainer questionSet={questionSet} />
         ) : (

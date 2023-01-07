@@ -16,11 +16,16 @@ export default function Question({ question, onAnswer, currentAns }: props) {
 
   return (
     <div className="questionSet">
-      <Form.Label htmlFor="question">{question?.question}</Form.Label>
+      <Form.Label htmlFor="answer" className="label" data-testid="question">
+        Q. {question?.question}
+      </Form.Label>
       <Form.Control
         type="text"
-        id="question"
+        data-testid="ans-input"
+        id="answer"
+        value={currentAns}
         onChange={handleInput}
+        placeholder="Answer"
         aria-describedby="passwordHelpBlock"
       />
     </div>

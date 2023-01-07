@@ -8,7 +8,7 @@ type props = {
 };
 
 export default function GameOver({ show }: props) {
-  const { restartGame } = useContext(GameContext);
+  const { restartGame, streak } = useContext(GameContext);
 
   return (
     <Modal show={show}>
@@ -17,7 +17,10 @@ export default function GameOver({ show }: props) {
       </Modal.Header>
       <Modal.Body>
         <div className="modalBody">
-          <div>Thank you for playing</div>
+          <div>
+            Thank you for playing game! <br />
+            Your streak : <strong>{streak}</strong>
+          </div>
           <Button
             variant="primary"
             className="restart"
