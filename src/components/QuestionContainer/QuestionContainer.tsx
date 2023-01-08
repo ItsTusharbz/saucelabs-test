@@ -15,7 +15,7 @@ export default function QuestionContainer({ questionSet }: props) {
   const [currentQuestionId, setcurrentQuestionId] = useState(0);
   const [currentAns, setCurrentAns] = useState("");
   const [showGameOverModal, setshowGameOverModal] = useState(false);
-  const { wrongAnswerCount, setWrongAnswersCount, setStreak, streak, isDark } =
+  const { wrongAnswerCount, setWrongAnswersCount, isDark } =
     useContext(GameContext);
   const [showMsg, setShowMsg] = useState("");
 
@@ -54,7 +54,6 @@ export default function QuestionContainer({ questionSet }: props) {
         setcurrentQuestionId((prev) =>
           prev === questionSet.length - 1 ? prev : prev + 1
         );
-        setStreak(streak + 1);
         setShowMsg("");
       }, 1000);
     } else {

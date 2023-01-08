@@ -9,7 +9,7 @@ type props = {
 };
 
 export default function GameOver({ show, setShow }: props) {
-  const { restartGame, streak, isDark } = useContext(GameContext);
+  const { restartGame } = useContext(GameContext);
 
   return (
     <Modal show={show} onHide={() => setShow()}>
@@ -20,7 +20,6 @@ export default function GameOver({ show, setShow }: props) {
         <div className={`modalBody`}>
           <div>
             Thank you for playing quizz! <br />
-            Your streak : <strong>{streak}</strong>
           </div>
           <Button
             variant="primary"

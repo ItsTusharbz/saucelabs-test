@@ -8,8 +8,6 @@ import { Form } from "react-bootstrap";
 export const GameContext = createContext<gameContextType>({
   wrongAnswerCount: 0,
   setWrongAnswersCount: () => {},
-  streak: 0,
-  setStreak: () => {},
   restartGame: () => {},
   isDark: false,
   setisDark: () => {},
@@ -19,7 +17,6 @@ function App() {
   const [questionSet, setQuestionSet] = useState<questionSetType>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [wrongAnswerCount, setWrongAnswersCount] = useState(0);
-  const [streak, setStreak] = useState(0);
   const [isDark, setisDark] = useState(false);
 
   useEffect(() => {
@@ -29,8 +26,6 @@ function App() {
       document.body.classList.remove("dark");
     }
   }, [isDark]);
-
-  const ref = useRef();
 
   const totalAttemp = 3;
   const fetchQuestions = async (): Promise<void> => {
@@ -61,7 +56,6 @@ function App() {
   const restartGame = () => {
     setQuestionSet(null);
     setWrongAnswersCount(0);
-    setStreak(0);
     fetchQuestions();
   };
 
@@ -70,8 +64,6 @@ function App() {
       value={{
         wrongAnswerCount,
         setWrongAnswersCount,
-        streak,
-        setStreak,
         restartGame: restartGame,
         isDark,
         setisDark,
@@ -96,7 +88,6 @@ function App() {
                   {totalAttemp - wrongAnswerCount}
                 </span>
               </h2>
-              <h5>Streak :{streak}</h5>
             </div>
           </div>
           {!isLoading ? (
