@@ -1,18 +1,8 @@
-import React from "react";
-import {
-  findByRole,
-  fireEvent,
-  getNodeText,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
-import QuestionContainer from "./components/QuestionContainer/QuestionContainer";
-import Question from "./components/Question/Questions";
-import userEvent from "@testing-library/user-event";
 import GameOver from "./components/GameOver/GameOver";
-import { Simulate } from "react-dom/test-utils";
+import Question from "./components/Question/Questions";
+import QuestionContainer from "./components/QuestionContainer/QuestionContainer";
 import { questionData } from "./MockData";
 
 test("Initial attemp value should be 3", () => {

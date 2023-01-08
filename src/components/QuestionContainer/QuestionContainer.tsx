@@ -1,6 +1,6 @@
 import sha1 from "crypto-js/sha1";
 import { useContext, useEffect, useState } from "react";
-import { Alert, Button, Toast } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import { GameContext } from "../../App";
 import { questionSetType } from "../../util/Types";
 import GameOver from "../GameOver/GameOver";
