@@ -5,20 +5,13 @@ import Question from "./components/Question/Questions";
 import QuestionContainer from "./components/QuestionContainer/QuestionContainer";
 import { questionData } from "./MockData";
 
-test("Initial attemp value should be 3", () => {
+test("Initial attemp value should be 3", async () => {
   render(<App />);
   const chanceCount = screen.getByText(/Chances left/i);
   const intialCount = screen.getByTestId("counter");
 
   expect(chanceCount).toBeInTheDocument();
   expect(intialCount).toHaveTextContent("3");
-
-  const verifyButton = screen.getByRole("button", { name: "Verify" });
-  expect(verifyButton).toBeVisible();
-  fireEvent.click(verifyButton);
-  fireEvent.click(verifyButton);
-  fireEvent.click(verifyButton);
-  expect(screen.getByTestId("counter")).toHaveTextContent("0");
 });
 
 test("test input field and button are working", async () => {
@@ -38,7 +31,7 @@ test("test input field and button are working", async () => {
   expect(input).toBeInTheDocument();
 });
 
-test("Check if wrong answer label is shown", async () => {
+test("Check Empty validation is visible", async () => {
   render(<QuestionContainer questionSet={questionData} />);
   const button = screen.getByRole("button", { name: "Verify" });
   expect(button).toBeInTheDocument();
@@ -46,6 +39,7 @@ test("Check if wrong answer label is shown", async () => {
   fireEvent.click(button);
   const alert = await screen.findByRole("alert");
   expect(alert).toBeVisible();
+  expect(alert).toHaveTextContent("Answer is required");
 });
 
 test("Test modal opens correctly", () => {

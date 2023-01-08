@@ -43,7 +43,7 @@ export default function QuestionContainer({ questionSet }: props) {
   const submit = () => {
     const answer = sha1(currentAns).toString();
     if (currentAns === "") {
-      setShowMsg("Answer can not be empty");
+      setShowMsg("Answer is required");
       return;
     }
     if (questionSet[currentQuestionId].answerSha1 === answer) {
